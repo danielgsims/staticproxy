@@ -14,8 +14,7 @@ class Foo
     }
 }
 
-$s = new StaticProxy;
-$s->using("Foo");
+$s = new StaticProxy("Foo");
 $s->doSomething();
 
 ```
