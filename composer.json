@@ -1,4 +1,6 @@
 {
+    "name": "danielgsims/staticproxy",
+    "description": "A thin proxy for static classes",
     "autoload": {
         "psr-4": {
              "StaticProxy\\": "lib"
