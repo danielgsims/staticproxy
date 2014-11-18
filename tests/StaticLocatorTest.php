@@ -1,10 +1,11 @@
 <?php
 
-class StaticTest extends PHPUnit_Framework_TestCase
+class StaticLocatorTest extends PHPUnit_Framework_TestCase
 {
     public function testStatic()
     {
-        $s = new StaticProxy\StaticProxy("StaticGuy");
+        $s = new StaticProxy\StaticProxyLocator;
+        $s->using("StaticGuy");
 
         $this->assertEquals($s->normal(1,2,3),[1,2,3]);
         $this->assertEquals($s->defaultArgs(),[1,2,3]);
@@ -16,28 +17,31 @@ class StaticTest extends PHPUnit_Framework_TestCase
     public function testMethodError()
     {
         $this->setExpectedException('StaticProxy\Exception');
-        $s = new StaticProxy\StaticProxy("StaticGuy");
+        $s = new StaticProxy\StaticProxyLocator;
+        $s->using("StaticGuy");
         $s->missing();
     }
     
     public function testClassUndefined()
     {
         $this->setExpectedException('StaticProxy\Exception');
-        $s = new StaticProxy\StaticProxy("NoClass");
+        $s = new StaticProxy\StaticProxyLocator;
+        $s->using("NoClass");
         $s->method();
     }
 
     public function testClassNotSet()
     {
         $this->setExpectedException('StaticProxy\Exception');
-        $s = new StaticProxy\StaticProxy;
+        $s = new StaticProxy\StaticProxyLocator;
         $s->method();
     }
 
     public function testNotStatic()
     {
         $this->setExpectedException('StaticProxy\Exception');
-        $s = new StaticProxy\StaticProxy("StaticGuy");
+        $s = new StaticProxy\StaticProxyLocator;
+        $s->using("StaticGuy");
         $s->notStatic();
     }
 }

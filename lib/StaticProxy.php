@@ -5,17 +5,18 @@ class StaticProxy
     private $namespace;
     private $class;
 
-    public function __construct($namespace = "")
+    public function __construct($class = "", $namespace = "")
     {
-        $this->usingNamespace($namespace);
+        $this->setNamespace($namespace);
+        $this->setClass($class);
     }
 
-    public function usingNamespace($namespace = "")
+    final protected function setNamespace($namespace = "")
     {
         $this->namespace = (string) $namespace;
     }
 
-    public function using($class)
+    final protected function setClass($class)
     {
         $this->class = (string) $class;
 
