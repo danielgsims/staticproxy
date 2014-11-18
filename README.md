@@ -2,7 +2,7 @@ StaticProxy
 ===========
 
 StaticProxy is a thin class that acts as a proxy for calling static methods. You can use StaticProxy when 
-you would like to injet an instance as opposed to calling static methods directly.
+you would like to inject an instance as opposed to calling static methods directly.
 
 ```
 
