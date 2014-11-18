@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+             "StaticProxy\\": "lib"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.3.*"
+    }
+}

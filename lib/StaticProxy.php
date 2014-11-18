@@ -57,7 +57,7 @@ class StaticProxy
 
     public function validateMethod($method, $args)
     {
-        $fqClass =$this->getFullyQualifiedClass();
+        $fqClass = $this->getFullyQualifiedClass();
 
         //Check if class has method
         if (!method_exists($fqClass, $method)) {
