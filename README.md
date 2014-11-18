@@ -18,3 +18,41 @@ $s = new StaticProxy("Foo");
 $s->doSomething();
 
 ```
+
+#Why?
+
+Sometimes, you have a dependency that only functions with static methods:
+
+```
+class MyController
+{
+    public function index(Request $request)
+    {
+        Validator::validate($request);
+        
+        //do something
+    }
+}
+```
+
+Ideally, you would want to avoid static methods to make your code loosely coupled. You can use a proxy to make this happen.
+
+```
+class MyController
+{
+    private $validator;
+
+    public function __construct(StaticProxy $validator)
+    {
+        $this->validator = $validator;
+    }
+
+    public function index(Request $request)
+    {
+        $this->validator->validate($request);
+    }
+}
+```
+
+This class is useful when you need to decouple static calls from your code but are unable to rewrite your
+dependencies, or do not have the means to create individual adapters.
