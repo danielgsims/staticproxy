@@ -25,9 +25,9 @@ class StaticProxy
 
     public function __call($method, $args)
     {
-        $this->classCheck(); 
+        $this->classCheck();
         $this->validateMethod($method, $args);
-        
+
         return call_user_func_array($this->getSignature($method), $args);
     }
 
@@ -36,24 +36,24 @@ class StaticProxy
         if (!$this->class) {
             throw new Exception("Must set class with Serializer::using method");
         }
-        
+
         $fqClass = $this->getFullyQualifiedClass();
 
         if (!class_exists($fqClass)) {
             throw new Exception("Class {$fqClass} does not exist.");
         }
     }
-    
+
     public function getFullyQualifiedClass()
     {
-        return $this->namespace 
-            ? $this->namespace . "\\" . $this->class 
+        return $this->namespace
+            ? $this->namespace . "\\" . $this->class
             : $this->class;
     }
 
     public function getSignature($method)
     {
-        return $this->getFullyQualifiedClass() . "::{$method}"; 
+        return $this->getFullyQualifiedClass() . "::{$method}";
     }
 
     public function validateMethod($method, $args)
@@ -70,12 +70,12 @@ class StaticProxy
         if (!$r->isStatic()) {
             throw new Exception("Class {$fqClass} method {$method} must be static.");
         }
-        
+
         $argCount = count($args);
         $paramCount = $r->getNumberOfRequiredParameters();
 
         if ($argCount < $paramCount) {
-            
+
             $message = "Class {$fqClass} method {$method} takes at least {$paramCount} arguments, {$argCount} given.";
             throw new Exception($message);
         }
