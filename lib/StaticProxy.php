@@ -26,4 +26,9 @@ class StaticProxy
     {
         return $this->class . "::{$method}";
     }
+
+    public function alias($name)
+    {
+        class_alias('StaticProxy\StaticProxy', $name);
+    }
 }
