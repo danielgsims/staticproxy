@@ -26,18 +26,4 @@ class StaticTest extends PHPUnit_Framework_TestCase
         $s = new StaticProxy\StaticProxy("NoClass");
         $s->method();
     }
-
-    public function testClassNotSet()
-    {
-        $this->setExpectedException('StaticProxy\Exception');
-        $s = new StaticProxy\StaticProxy;
-        $s->method();
-    }
-
-    public function testNotStatic()
-    {
-        $this->setExpectedException('StaticProxy\Exception');
-        $s = new StaticProxy\StaticProxy("StaticGuy");
-        $s->notStatic();
-    }
 }
