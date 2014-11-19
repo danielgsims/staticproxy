@@ -56,3 +56,31 @@ class MyController
 
 This class is useful when you need to decouple static calls from your code but are unable to rewrite your
 dependencies, or do not have the means to create individual adapters.
+
+#Alias
+
+In the above example, we had to typehint that we were using a static proxy, but that's not ideal. Instead, we can use the Aliaser
+to register aliases of StaticProxy.
+
+```
+class MyController
+{
+    private $validator;
+
+    public function __construct(Acme\Validator $validator)
+    {
+        $this->validator = $validator;
+    }
+
+    public function index(Request $request)
+    {
+        $this->validator->validate($request);
+    }
+}
+
+$a = new Aliaser;
+$a->register("Acme\Validator");
+
+$s = new StaticProxy("Foo");
+$c = new MyController($s);
+```
