@@ -26,4 +26,12 @@ class StaticTest extends PHPUnit_Framework_TestCase
         $s = new StaticProxy\StaticProxy("NoClass");
         $s->method();
     }
+
+    public function testAlias()
+    {
+        $s = new StaticProxy\StaticProxy("StaticGuy");
+        $s->alias("FancyProxy");
+
+        $this->assertTrue(is_a($s, "FancyProxy"));
+    }
 }
